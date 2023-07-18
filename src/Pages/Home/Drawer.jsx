@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import useUser from '../useUser';
 
 const Drawer = () => {
-  const [users]=useUser()
+  const [users]=useUser([])
   // const role=users?.data?.data?.role
   console.log(users)
   

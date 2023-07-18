@@ -1,7 +1,10 @@
 import React from 'react';
 import SidePage from '../SidePage';
+import { useParams } from 'react-router-dom';
 
 const MyBookings = () => {
+    const {email}=useParams()
+    console.log(email)
     return (
         <div className='flex justify-between'>
             <SidePage></SidePage>

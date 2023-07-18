@@ -13,7 +13,7 @@ const SignUp = () => {
     const [cPassword,setCPassword]=useState('')
     const [errorMessage,setErrorMessage]=useState('')
 
-    const [setUsers]=useUser()
+    const [setUser]=useUser()
 
     const navigate=useNavigate()
 
@@ -61,13 +61,13 @@ const SignUp = () => {
         }
         axios.post('http://localhost:5000/api/v1/user/signup',userData)
         .then(res=>{
-            setUsers(res?.data?.data)
-            if(res.data.data.role==='owner'){
-              
-                navigate('/myhouses')
-            }else if(res.data.data.role==='renter'){
-              
-                navigate('/myBookings')
+            // setUsers(res?.data?.data)
+            if(res.data.data.role==='owner'){              
+                navigate(`/myhouses/${res.data.data.email}`)
+                // return setUser(res?.data?.data)
+            }else if(res.data.data.role==='renter'){              
+                navigate(`/myBookings/${res.data.data.email}`)
+                // return setUser(res?.data?.data)
             }
         })
     }

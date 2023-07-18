@@ -9,6 +9,8 @@ import SignIn from './Pages/SignUp/SignIn';
 import MyBookings from './Pages/Dashboard/Renter/MyBookings';
 import ManageBookings from './Pages/Dashboard/Renter/ManageBookings';
 import MyHouses from './Pages/Dashboard/Owner/MyHouses';
+import ManageHouses from './Pages/Dashboard/Owner/ManageHouses';
+import AddHouse from './Pages/Dashboard/Owner/AddHouse';
 
 function App() {
   
@@ -16,11 +18,12 @@ function App() {
     <div className="App">
       <ToastContainer></ToastContainer>
       <Routes>
-       <Route path='/' element={<Drawer></Drawer>}>
-       </Route>
-        <Route path='/myhouses' element={<MyHouses></MyHouses>}></Route>
-        <Route path='/myBookings' element={<MyBookings></MyBookings>}></Route>   
-        <Route path='/manageBookings' element={<ManageBookings></ManageBookings>}></Route>    
+       <Route path='/' element={<Drawer></Drawer>}></Route>
+        <Route path='/myhouses/:email' element={<MyHouses></MyHouses>}></Route>
+        <Route path='/myBookings/:email' element={<MyBookings></MyBookings>}></Route>   
+        <Route path='/manageBookings' element={<ManageBookings></ManageBookings>}></Route> 
+        <Route path='/manageHouses' element={<ManageHouses></ManageHouses>}></Route>   
+        <Route path='/addHouse' element={<AddHouse></AddHouse>}></Route>
        <Route path='/:id' element={<HouseDetail></HouseDetail>}></Route>
        <Route path='/signup' element={<SignUp></SignUp>}></Route>
        <Route path='/signin' element={<SignIn></SignIn>}></Route>
