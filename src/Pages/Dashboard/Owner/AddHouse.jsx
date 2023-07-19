@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 
 const AddHouse = () => {
+
+    const {email}=useParams()
+
     const [name,setName]=useState('')
-    const [email,setEmail]=useState('')
+    // const [email,setEmail]=useState('')
     const [rent,setRent]=useState(0)
     const [address,setAddress]=useState('')
     const [city,setCity]=useState('')
@@ -63,8 +66,8 @@ const AddHouse = () => {
             <h2 className='text-xl font-semibold text-gray-800'>Add Your House</h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className='w-[45%] mx-auto mt-14 shadow-md rounded-lg p-7 '>
-            <input onChange={(e)=>setName(e.target.value)} type="text" placeholder="Name" className="input input-bordered w-full max-w-xs my-3"  required/>
-            <input onChange={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Email" className="input input-bordered w-full max-w-xs my-3"  required/>
+            <input onChange={(e)=>setName(e.target.value)} type="text" placeholder="House name" className="input input-bordered w-full max-w-xs my-3"  required/>
+            <input value={email} disabled type="email" placeholder="Email" className="input input-bordered w-full max-w-xs my-3"  required/>
             <input onChange={(e)=>{setRent(e.target.value)}} type="number" placeholder="Rent" className="input input-bordered w-full max-w-xs my-3"  required/>
             <input onChange={(e)=>{setAddress(e.target.value)}} type="text" placeholder="Address" className="input input-bordered w-full max-w-xs my-3"  required/>
             <input onChange={(e)=>{setCity(e.target.value)}} type="text" placeholder="City" className="input input-bordered w-full max-w-xs my-3"  required/>

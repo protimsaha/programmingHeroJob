@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const ManageHouses = () => {
     const {email}=useParams()
+    console.log(email)
 
     const [houses,setHouses]=useState([])
     useEffect(()=>{
@@ -42,11 +43,11 @@ const ManageHouses = () => {
      {
         houses.map((h,index)=> <tr key={h._id}>
             <th>{index+1}</th>
-            <td>{h.name}</td>
-            <td>{h.rent}</td>
-            <td>{h.address}</td>
-            <td><Link to='/updateHouse/:id' className="btn btn-primary ">Edit</Link></td>
-            <td><button onClick={()=>deleteHouse(h._id)} className="btn bg-red-500">Delete</button></td>
+            <td>{h?.name}</td>
+            <td>{h?.rent}</td>
+            <td>{h?.address}</td>
+            <td><Link to={`/updateHouse/${h._id}`} className="btn btn-primary ">Edit</Link></td>
+            <td><button onClick={()=>deleteHouse(h?._id)} className="btn bg-red-500">Delete</button></td>
           </tr>)
      }
      

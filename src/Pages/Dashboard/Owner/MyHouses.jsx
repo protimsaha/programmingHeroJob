@@ -7,8 +7,6 @@ const MyHouses = () => {
 
     const {email}=useParams()
 
-    // const [user]=useUser()
-
     const [houses,setHouses]=useState([])
     useEffect(()=>{
         fetch(`http://localhost:5000/api/v1/houses/${email}`) 
@@ -25,7 +23,7 @@ const MyHouses = () => {
                 {houses.map(h=><House h={h} key={h._id}></House>)}
                 </div>}
 
-               <Link to='/addHouse' className="btn btn-primary mt-10">Add houses</Link>
+               <Link to={`/addHouse/${email}`} className="btn btn-primary mt-10">Add houses</Link>
 
             </div>
         </div>
