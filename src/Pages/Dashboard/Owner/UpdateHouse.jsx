@@ -1,11 +1,18 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddHouse = () => {
-    const [name,setName]=useState('')
-    const [email,setEmail]=useState('')
+const UpdateHouse = () => {
+    const {id} = useParams()
+    const [detail,setDetail]= useState({})
+    useEffect(()=>{
+        fetch(`http://localhost:5000/api/v1/house/${id}`)
+        .then(res=>res.json())
+        .then(data=>setDetail(data[0]))
+    },[id])
+
+
     const [rent,setRent]=useState(0)
     const [address,setAddress]=useState('')
     const [city,setCity]=useState('')
@@ -33,8 +40,8 @@ const AddHouse = () => {
             .then(imgData=>{
                const imageUrl=imgData.data.url
                const addData={
-                name:name,
-                email:email,
+                name:detail.name,
+                email:detail.email,
                 rent:Number(rent),
                 address:address,
                 city:city,
@@ -45,11 +52,11 @@ const AddHouse = () => {
                 phoneNumber:phonenumber,
                 desc:description
             }
-            // console.log(addData.image)
-            axios.post('http://localhost:5000/api/v1/houses',addData)
+            // console.log(addData)
+            axios.patch(`http://localhost:5000/api/v1/houses/${detail._id}`,addData)
             .then(res=>{
                if(res.status===200){
-                navigate(`/myhouses/${email}`)
+                navigate(`/ManageHouses/${detail.email}`)
                }
             })
 
@@ -60,11 +67,12 @@ const AddHouse = () => {
 
     return (
         <div className='mb-10'>
-            <h2 className='text-xl font-semibold text-gray-800'>Add Your House</h2>
+            <h2 className='text-xl font-semibold text-gray-800'>Update Your House Data</h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className='w-[45%] mx-auto mt-14 shadow-md rounded-lg p-7 '>
-            <input onChange={(e)=>setName(e.target.value)} type="text" placeholder="Name" className="input input-bordered w-full max-w-xs my-3"  required/>
-            <input onChange={(e)=>{setEmail(e.target.value)}} type="email" placeholder="Email" className="input input-bordered w-full max-w-xs my-3"  required/>
+              
+            <input disabled value={detail.name} type="text" placeholder="Name" className="input input-bordered w-full max-w-xs my-3"  required/>
+            <input disabled value={detail.email} type="email" placeholder="Email" className="input input-bordered w-full max-w-xs my-3"  required/>
             <input onChange={(e)=>{setRent(e.target.value)}} type="number" placeholder="Rent" className="input input-bordered w-full max-w-xs my-3"  required/>
             <input onChange={(e)=>{setAddress(e.target.value)}} type="text" placeholder="Address" className="input input-bordered w-full max-w-xs my-3"  required/>
             <input onChange={(e)=>{setCity(e.target.value)}} type="text" placeholder="City" className="input input-bordered w-full max-w-xs my-3"  required/>
@@ -102,4 +110,4 @@ const AddHouse = () => {
     );
 };
 
-export default AddHouse;
+export default UpdateHouse;

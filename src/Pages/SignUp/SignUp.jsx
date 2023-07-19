@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import useUser from '../useUser';
 
 const SignUp = () => {
     
@@ -13,7 +12,6 @@ const SignUp = () => {
     const [cPassword,setCPassword]=useState('')
     const [errorMessage,setErrorMessage]=useState('')
 
-    const [setUser]=useUser()
 
     const navigate=useNavigate()
 

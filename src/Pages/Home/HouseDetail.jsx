@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import { toast } from 'react-toastify';
+// import axios from 'axios';
 
 const HouseDetail = () => {
     const {id} = useParams()
     const [detail,setDetail]= useState({})
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/v1/houses/${id}`)
+        fetch(`http://localhost:5000/api/v1/house/${id}`)
         .then(res=>res.json())
-        .then(data=>setDetail(data))
+        .then(data=>setDetail(data[0]))
     },[id])
-//   const toastOn=()=>{n  
-//     window.my_modal_1.showModal()
-//     showModal('my_modal_1')
-//   }
-//   const showModal=()=>{
 
-//   }
-// const {name}=detail
+    // const addbooking =(id)=>{
+    //   axios.post(`http://localhost:5000/api/v1/house/${id}`)
+    // }
 
     return (
         <div className='xl:px-10 container '>
@@ -26,19 +24,17 @@ const HouseDetail = () => {
             <div className="card card-compact w-3/4 mx-auto mt-14 bg-base-100 shadow-xl">
   <figure><img className='w-[70%]' src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' alt="Shoes" /></figure>
   <div className=" p-11">
-    <h2 className="card-title">{detail.name}</h2>
-    {/* <h2>{detail}</h2> */}
-    <p className='text-start text-base'>If a dog chews shoes whose shoes does he choose?</p>
-    <h3 className='text-gray-800 font-semibold text-lg text-start'>{detail.address}</h3>
+    <h2 className="card-title text-2xl text-sky-800 font-bold">{detail.name}</h2>
+    <p className='text-start text-base'>{detail.desc}</p>
+    <h3 className='text-gray-800 font-semibold text-lg text-start'>Address: {detail.address}</h3>
     <h3 className='text-gray-800 font-semibold text-lg text-start'>Room Size: {detail.roomSize}</h3>
-    <h3 className='text-gray-800 font-semibold text-lg text-start'>Number of Bedroom:{detail.bedroom}</h3>
-    <h3 className='text-gray-800 font-semibold text-lg text-start'>Number of Bathroom:</h3>
-    <h3 className='text-gray-800 font-semibold text-lg text-start'>Available date:</h3>
-    <h3 className='text-gray-800 font-semibold text-lg text-start'>Phone number:</h3>
+    <h3 className='text-gray-800 font-semibold text-lg text-start'>Number of Bedroom: {detail.bedrooms}</h3>
+    <h3 className='text-gray-800 font-semibold text-lg text-start'>Number of Bathroom: {detail.bathrooms}</h3>
+    <h3 className='text-gray-800 font-semibold text-lg text-start'>Phone number: {detail.phoneNumber}</h3>
    
     <div className="flex justify-between mt-10">
         <h2 className='text-lg text-gray-800 font-semibold'>Rent per month: <span className='text-pink-500'>{detail.rent} bdt</span> </h2>
-      <button className="btn btn-primary">Book Now</button>
+      <button onClick={()=>toast.success('Booked')} className="btn btn-primary">Book Now</button>
 
     </div>
   </div>

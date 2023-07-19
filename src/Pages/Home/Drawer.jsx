@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import Filters from './Filters';
 import Houses from './Houses';
 import Navbar from './Navbar';
-import useUser from '../useUser';
+import useUser from '../useUser'
+
 
 const Drawer = () => {
-  const [users]=useUser([])
-  // const role=users?.data?.data?.role
-  console.log(users)
-  
+const [user]=useUser()  
+console.log(user)
+// const usersArray = user?.users;
+// const selectedUser = usersArray[usersArray?.length-1]
+
+
+
     return (
         <div className='container'>
             <div className="drawer">
@@ -24,9 +28,16 @@ const Drawer = () => {
     <label htmlFor="my-drawer" className="drawer-overlay"></label>
     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
       {/* Sidebar content here */}
-
-       <li><Link to='/myBookings'>My bookings</Link></li>
+      
+       <div>
+      <li><Link to='/myBookings'>My bookings</Link></li>
       <li><Link to='/manageBookings'>Manage Bookings</Link></li>
+      </div>
+      <div>
+         <li><Link to='/myBookings'>My bookings</Link></li>
+      <li><Link to='/manageBookings'>Manage Bookings</Link></li>
+        </div>
+     
       
     </ul>
   </div>

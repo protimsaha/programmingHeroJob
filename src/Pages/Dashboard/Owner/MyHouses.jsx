@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SidePagesO from './SidePagesO';
 import {  Link, useParams } from 'react-router-dom';
+import House from '../../Home/House';
 
 const MyHouses = () => {
 
@@ -14,16 +15,17 @@ const MyHouses = () => {
         .then(res=>res.json())
         .then(data=>setHouses(data))
     },[email])
-    console.log(houses.length)
     return (
      
         <div className='flex justify-between'>
             <SidePagesO></SidePagesO>
             <div className='mx-auto'>
             <h2 className='text-xl font-semibold text-gray-800'>My Houses</h2>
-               {houses.length===0 && <h2 className='text-lg font-semibold text-gray-800 my-10'>No houses added yet. Add some!</h2>}
+               {houses.length===0 ? <h2 className='text-lg font-semibold text-gray-800 my-10'>No houses added yet. Add some!</h2>:<div>
+                {houses.map(h=><House h={h} key={h._id}></House>)}
+                </div>}
 
-               <Link to='/addHouse' className="btn btn-primary">Add houses</Link>
+               <Link to='/addHouse' className="btn btn-primary mt-10">Add houses</Link>
 
             </div>
         </div>
