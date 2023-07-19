@@ -12,7 +12,7 @@ const HouseDetail = () => {
         .then(res=>res.json())
         .then(data=>setDetail(data[0]))
     },[id])
-
+console.log(detail.email)
     // const addbooking =(id)=>{
     //   axios.post(`http://localhost:5000/api/v1/house/${id}`)
     // }
